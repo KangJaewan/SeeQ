@@ -1,0 +1,79 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Backend specific
+Backend/uploads/*
+!Backend/uploads/.gitkeep
+Backend/logs/*.log
+Backend/logs/*
+!Backend/logs/.gitkeep
+
+# Node.js / React
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+Frontend/build/
+Frontend/.pnp
+Frontend/.pnp.js
+
+# Testing
+coverage/
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Large files
+*.pdf
+*.mp4
+*.avi
+*.mov
+*.wmv
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+.cache/
+
+# MongoDB
+*.mongo
+
+# Logs
+logs/
+*.log

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeeQ Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard-base.css">
+    <link rel="stylesheet" href="dashboard-components.css">
+    <link rel="stylesheet" href="dashboard-tables.css">
+    <link rel="stylesheet" href="dashboard-modules.css">
+    <link rel="stylesheet" href="dashboard-sidebar.css">
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 좌측 사이드바 -->
+        <div class="sidebar">
+            <!-- 프로필 이미지 -->
+            <div class="profile-image">
+                <img src="KakaoTalk_20250610_101249994.png" alt="프로필" />
+            </div>
+            
+            <!-- 검색 아이콘 -->
+            <div class="sidebar-icon">
+                <svg class="icon search-icon" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </div>
+            
+            <!-- 홈 아이콘 -->
+            <div class="sidebar-icon" id="home-icon" onclick="navigateToHome()" title="홈으로 이동">
+                <svg class="icon home-icon" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                </svg>
+            </div>
+            
+            <!-- 폴더 아이콘 -->
+            <div class="sidebar-icon">
+                <svg class="icon folder-icon" viewBox="0 0 24 24">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
+            
+            <div class="sidebar-spacer"></div>
+            
+            <!-- 설정 아이콘 -->
+            <div class="sidebar-icon" id="settings-icon" onclick="openBackgroundColorSettings()" title="배경색 설정">
+                <svg class="icon settings-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </div>
+            
+            <!-- 벨 아이콘 -->
+            <div class="sidebar-icon">
+                <svg class="icon bell-icon" viewBox="0 0 24 24">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content" id="mainContent">
+            <div class="header-section">
+                <div class="title-container">
+                    <div class="status-dot"></div>
+                    <h1 class="main-title">경영학</h1>
+                    <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="다크 모드 전환">
+                        <svg class="dark-mode-icon light-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="dark-mode-icon dark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h2 class="section-title">파일 목록</h2>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div id="selection-status" style="color: #6b7280; font-size: 14px; font-weight: 500;">
+                            <!-- 선택 상태가 여기에 표시됩니다 -->
+                        </div>
+                        <button onclick="clearAllSelections()" 
+                                style="background: none; border: 1px solid #d1d5db; color: #6b7280; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">
+                            전체 해제
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 메인 콘텐츠 컨테이너 -->
+            <div class="main-container" id="mainContainer">
+                <!-- 상단 영역: 파일 목록과 사이드 모듈 -->
+                <div class="top-section">
+                    <!-- 파일 목록 영역 -->
+                    <div class="file-section" id="fileSection">
+                        <div class="table-header">
+                            <div class="header-cell">
+                                <div class="file-checkbox">
+                                    <input type="checkbox" 
+                                           class="document-checkbox" 
+                                           id="select-all-checkbox"
+                                           onchange="selectAllDocuments()">
+                                    <label for="select-all-checkbox" class="checkbox-label"></label>
+                                </div>
+                                이름
+                                <svg class="sort-arrow" viewBox="0 0 24 24">
+                                    <path d="M7 10l5 5 5-5" stroke="currentColor" fill="none" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="header-cell">
+                                글자수
+                                <svg class="sort-arrow" viewBox="0 0 24 24">
+                                    <path d="M17 14l-5-5-5 5" stroke="currentColor" fill="none" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="header-cell">수정일</div>
+                            <div class="header-cell">유형</div>
+                            <div class="header-cell">작업</div>
+                        </div>
+                        <div class="file-list-body">
+                            <!-- 파일 목록이 들어갈 영역 -->
+                            
+                            <!-- Pile Chart 컴포넌트들 -->
+                            <div class="pile-container">
+                                <!-- 동적으로 로드된 문서들이 여기에 표시됩니다 -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 우측 대시보드 모듈 영역 -->
+                    <div class="dashboard-modules right-modules" id="dashboardModulesRight">
+                        <!-- 우측 모듈들이 여기에 추가됩니다 -->
+                    </div>
+                </div>
+                
+                <!-- 하단 대시보드 모듈 영역 -->
+                <div class="dashboard-modules bottom-modules" id="dashboardModulesBottom">
+                    <!-- 하단 모듈들이 여기에 추가됩니다 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 우측 사이드바 토글 버튼 -->
+        <button class="sidebar-toggle" id="sidebarToggle">
+            &lt;&lt;
+        </button>
+        
+        <!-- 우측 사이드바 -->
+        <div class="right-sidebar" id="rightSidebar">
+            <div class="right-sidebar-content">
+                <!-- Font Size Control 섹션 -->
+                <div class="font-size-control">
+                    <div class="component-header">
+                        <h3 class="component-title">글꼴 크기</h3>
+                        <div class="component-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                                <path d="M4 7V4h16v3M9 20h6M12 4v16"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="font-size-controls">
+                        <div class="font-size-slider-container">
+                            <label for="fontSizeSlider" class="font-size-label">크기 조절</label>
+                            <div class="slider-wrapper">
+                                <span class="size-indicator small">A</span>
+                                <input type="range" 
+                                       id="fontSizeSlider" 
+                                       class="font-size-slider" 
+                                       min="80" 
+                                       max="150" 
+                                       value="100" 
+                                       step="10">
+                                <span class="size-indicator large">A</span>
+                            </div>
+                            <div class="font-size-display">
+                                <span id="fontSizeValue">100%</span>
+                            </div>
+                        </div>
+                        <button class="font-reset-btn" id="fontResetBtn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                                <path d="M21 3v5h-5"></path>
+                                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                                <path d="M3 21v-5h5"></path>
+                            </svg>
+                            초기화
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chat Section 컴포넌트 -->
+                <div class="chat-section" draggable="true" data-component="chat">
+                    <div class="component-header">
+                        <h3 class="component-title">SeeQ Chat</h3>
+                        <div class="component-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" placeholder="질문을 입력하세요...">
+                        <button class="send-button" id="open-chat-bar-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quiz Tool 컴포넌트 -->
+                <div class="quiz-tool" draggable="true" data-component="quiz">
+                    <div class="component-header">
+                        <h3 class="component-title">Quiz</h3>
+                        <div class="component-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="action-button quiz-mate-button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"></polygon>
+                        </svg>
+                        Quiz Mate 만나기
+                    </button>
+                </div>
+                
+                <!-- Keywords Tool 컴포넌트 -->
+                <div class="keywords-tool" draggable="true" data-component="keywords">
+                    <div class="component-header">
+                        <h3 class="component-title">Keyword</h3>
+                        <div class="component-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2">
+                                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="action-button extract-button" id="extract-keywords-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                        키워드 추출
+                    </button>
+                </div>
+                
+                <!-- Summary Tool 컴포넌트 -->
+                <div class="summary-tool" draggable="true" data-component="summary">
+                    <div class="component-header">
+                        <h3 class="component-title">Summary</h3>
+                        <div class="component-icon">
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="action-button summary-button" id="generate-summary-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                        </svg>
+                        요약 생성
+                    </button>
+                </div>
+                
+
+                
+                <!-- Report Tool 컴포넌트 -->
+                <div class="report-tool" draggable="true" data-component="report">
+                    <div class="report-tool-header">
+                        <h3 class="report-tool-title">Report</h3>
+                        <div class="report-tool-image"></div>
+                    </div>
+                    <button class="report-tool-button" id="open-report-bar-btn">
+                        <div class="report-tool-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.16667">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="M21 21l-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                        <span class="report-tool-button-text">보고서 요약/정리 보기</span>
+                    </button>
+                </div>
+
+                <!-- Recommendation Tool 컴포넌트 -->
+                <div class="recommendation-tool" draggable="true" data-component="recommendation">
+                                    <div class="recommendation-tool-header">
+                    <h3 class="recommendation-tool-title">Recommendation</h3>
+                    <div class="recommendation-tool-image">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                        </svg>
+                    </div>
+                </div>
+                    <button class="recommendation-tool-button" id="open-recommendation-btn">
+                        <div class="recommendation-tool-button-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="M21 21l-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                        <span class="recommendation-tool-button-text">관련 컨텐츠 추천</span>
+                    </button>
+                </div>
+
+                <!-- Memo Tool 컴포넌트 -->
+                <div class="memo-tool" draggable="true" data-component="memo">
+                    <div class="memo-tool-header">
+                        <div class="memo-tool-title-section">
+                            <div class="memo-tool-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fef3c7" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10,9 9,9 8,9"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="memo-tool-title">Memo</h3>
+                        </div>
+                        <div class="memo-tool-actions">
+                            <button class="memo-list-btn" title="메모 목록">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ecd371" stroke-width="1.5">
+                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button class="memo-add-btn" id="open-memo-bar-btn" title="새 메모 추가">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Summary Frame Bar -->
+        <div class="summary-frame-bar" id="summaryFrameBar">
+            <div class="summary-bar-header">
+                <h3 class="summary-bar-title">Summary</h3>
+                <button class="close-summary-btn" id="close-summary-bar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M15 9l-6 6"></path>
+                        <path d="M9 9l6 6"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="summary-content">
+                <div class="summary-display-area">
+                    <div class="summary-placeholder">
+                        <div class="placeholder-text">문서 요약이 여기에 표시됩니다</div>
+                        <div class="placeholder-subtext">요약 보기 버튼을 클릭하여 문서의 주요 내용을 확인하세요</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="summary-action">
+                <button class="hide-summary-btn" id="hide-summary-bar-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="M21 21l-4.35-4.35"></path>
+                    </svg>
+                    숨기기
+                </button>
+            </div>
+        </div>
+        
+        <!-- Keywords Tool Bar -->
+        <div class="keywords-tool-bar" id="keywordsToolBar">
+            <div class="keywords-bar-header">
+                <h3 class="keywords-bar-title">Keyword</h3>
+                <button class="close-keywords-btn" id="close-keywords-bar-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="keywords-display">
+                <div class="keywords-row">
+                    <span class="keyword-tag">자기존중</span>
+                    <span class="keyword-tag">개발</span>
+                    <span class="keyword-tag">UI/UX</span>
+                    <span class="keyword-tag">일정</span>
+                </div>
+                <div class="keywords-row">
+                    <span class="keyword-tag">팀구성</span>
+                    <span class="keyword-tag">성능최적화</span>
+                </div>
+            </div>
+            
+            <div class="keywords-action">
+                <button class="hide-keywords-btn" id="hide-keywords-bar-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="M21 21l-4.35-4.35"></path>
+                    </svg>
+                    숨기기
+                </button>
+            </div>
+        </div>
+        
+        <!-- Chat Section Bar -->
+        <div class="chat-section-bar" id="chatSectionBar">
+            <div class="chat-bar-header">
+                <h3 class="chat-bar-title">SeeQ Chat</h3>
+                <div class="chat-header-controls">
+                    <!-- 채팅 기록 초기화 버튼 -->
+                    <button class="clear-chat-btn" onclick="clearChatHistory()" title="채팅 기록 초기화">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <polyline points="3,6 5,6 21,6"></polyline>
+                            <path d="m19,6v14a2,2 0 0,1-2,2H7a2,2 0 0,1-2-2V6m3,0V4a2,2 0 0,1,2-2h4a2,2 0 0,1,2,2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                    </button>
+                    <!-- 닫기 버튼 -->
+                    <button class="close-chat-btn" id="close-chat-bar-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M15 9l-6 6"></path>
+                            <path d="M9 9l6 6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 채팅 상태 표시 -->
+            <div class="chat-status" id="chatStatus">AI와 대화를 시작해보세요</div>
+            
+            <div class="chat-messages" id="chatBarMessages">
+                <!-- 환영 메시지 -->
+                <div class="ai-message">
+                    <div class="message-bubble ai-bubble">
+                        안녕하세요! SeeQ Chat입니다. 📚<br>
+                        업로드된 문서에 대해 궁금한 것이 있으시면 언제든 물어보세요.
+                        <div class="message-metadata" style="font-size: 11px; color: #6b7280; margin-top: 4px; opacity: 0.8;">
+                            🤖 hybrid | 신뢰도: 100% | welcome
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-bar-input">
+                <input type="text" class="chat-bar-input-field" id="chatBarInputField" placeholder="질문을 입력하세요...">
+                <button class="chat-bar-send-btn" id="chat-bar-send-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Sticky Memo Bar -->
+        <div class="sticky-memo-bar" id="stickyMemoBar">
+            <div class="memo-bar-header">
+                <div class="memo-title-section">
+                    <div class="memo-header-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fef3c7" stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3 class="memo-bar-title">메모</h3>
+                </div>
+                <div class="memo-bar-controls">
+                    <button class="memo-minimize-btn" id="minimize-memo-bar-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <button class="memo-close-btn" id="close-memo-bar-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="memo-list-container">
+                <div class="memo-item" data-memo-id="1">
+                    <div class="memo-item-header">
+                        <h4 class="memo-item-title">할 일 목록</h4>
+                        <div class="memo-item-actions">
+                            <button class="memo-edit-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="memo-delete-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="memo-item-content">
+                        • ADSP 데이터분석 준전문가 기출문제 풀기
+                    </div>
+                    <div class="memo-item-time">2024.01.15 14:30</div>
+                </div>
+                
+                <div class="memo-item memo-item-gray" data-memo-id="2">
+                    <div class="memo-item-header">
+                        <h4 class="memo-item-title">철학이 필요한 순간</h4>
+                        <div class="memo-item-actions">
+                            <button class="memo-edit-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="memo-delete-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="memo-item-content">
+                        삶을 의미 있게 만들어줄 10가지 생각<br>
+                        우리가 그자체를 위해 하는 것이 선이다<br>
+                        존엄성은 가격으로 따질수도 없고 대체될 수도 없다<br>
+                        인간은 약속하는 동물이다<br>
+                        자기란 관계 그 자체와 관계하는 관계다<br>
+                        진리가 존재하지 않더라도 인간은 진실할 수 있다
+                    </div>
+                    <div class="memo-item-time">2024.01.15 11:20</div>
+                </div>
+            </div>
+            
+            <button class="memo-add-new-btn" id="add-new-memo-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>새 메모 추가</span>
+            </button>
+            
+            <div class="memo-resize-handle">
+                <div class="resize-grip"></div>
+            </div>
+        </div>
+
+        <!-- New Report Bar -->
+        <div class="new-report-bar" id="newReportBar">
+            <div class="report-content-area">
+                <div class="report-placeholder-content">
+                    <div class="report-placeholder-text">보고서 내용이 여기에 표시됩니다</div>
+                    <div class="report-placeholder-subtext">백엔드에서 로드된 보고서가 표시됩니다</div>
+                </div>
+                
+                <button class="report-start-button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="M21 21l-4.35-4.35"></path>
+                    </svg>
+                    <span>보고서 요약/정리 보기</span>
+                </button>
+            </div>
+            
+            <div class="report-controls">
+                <div class="report-navigation-controls">
+                    <button class="report-nav-btn" id="report-prev-btn">
+                        <svg width="7" height="10.66" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2.22">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                    <button class="report-nav-btn" id="report-next-btn">
+                        <svg width="7" height="10.66" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2.22">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            
+                <div class="report-toolbar-controls">
+                    <button class="report-toolbar-btn" title="다운로드">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7,10 12,15 17,10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </button>
+                    <button class="report-toolbar-btn" title="인쇄">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="1.5">
+                        <polyline points="6,9 6,2 18,2 18,9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <polyline points="6,14 6,22 18,22 18,14"></polyline>
+                    </svg>
+                </button>
+                    <div class="report-toolbar-divider"></div>
+                    <button class="report-toolbar-btn share-btn" title="공유">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                </button>
+            </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- 배경색 설정 모달 -->
+    <div class="background-color-modal" id="backgroundColorModal" style="display: none;">
+        <div class="modal-overlay" onclick="closeBackgroundColorSettings()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close-btn" onclick="closeBackgroundColorSettings()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="color-section">
+                    <div class="preset-colors">
+                        <div class="color-option" data-color="#ffffff" style="background-color: #ffffff;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#f8fafc" style="background-color: #f8fafc;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#f1f5f9" style="background-color: #f1f5f9;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#fef7f0" style="background-color: #fef7f0;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#f0f9ff" style="background-color: #f0f9ff;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#f0fdf4" style="background-color: #f0fdf4;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#fefce8" style="background-color: #fefce8;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#fdf2f8" style="background-color: #fdf2f8;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                        <div class="color-option" data-color="#f5f3ff" style="background-color: #f5f3ff;">
+                            <div class="color-checkmark">✓</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="color-section">
+                    <div class="custom-color-picker">
+                        <input type="color" id="customColorPicker" value="#ffffff">
+                        <button class="apply-custom-color-btn" onclick="applyCustomColor()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="color-section">
+                    <div class="reset-section">
+                        <button class="reset-color-btn" onclick="resetBackgroundColor()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                                <path d="M21 3v5h-5"></path>
+                                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                                <path d="M3 21v-5h5"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard-api.js" defer></script>
+    <script src="dashboard-utils.js" defer></script>
+    <script src="dashboard.js" defer></script>
+</body>
+</html> 

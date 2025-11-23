@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 기본 글자 크기 설정 */
+html {
+  font-size: 12px; /* 브라우저 기본(16px)의 75% = 12px */
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 11px; /* 모바일에서는 더 작게 */
+  }
+} 
